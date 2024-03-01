@@ -12,7 +12,8 @@ def deserialize_card(card):
     return (KINDS[card // 13], min(card % 13, 10))
 
 def count_deck(deck):
-    return sum(map(lambda card: deserialize_card(card)[1] + 1, deck))
+    value = sum(map(lambda card: deserialize_card(card)[1] + 1, deck))
+    return -1 if value > 21 else value
 
 def stringify_card(card):
     (kind, value) = deserialize_card(card)
@@ -30,7 +31,7 @@ while True:
     if option == "HIT":
         joueur.append(pick_card())
         print(stringify_deck(joueur))
-        if count_deck(joueur) > 21:
+        if count_deck(joueur) == -1:
             print("Degage sale clochard")
             break
     elif option == "STAND":
