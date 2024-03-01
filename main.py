@@ -39,3 +39,13 @@ while True:
         break
     else:
         print("Option inconnue")
+
+count_croupier = count_deck(croupier)
+res = count_deck(joueur) - count_croupier
+print(f"Deck croupier: {count_croupier}")
+if res > 0:
+    print("Joueur a gagné")
+elif res == 0:
+    print("Égalité")
+else:
+    print("Joueur a perdu")
