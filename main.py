@@ -1,10 +1,12 @@
 import random
 
+
 KINDS = {0: "Carreau", 1: "Pic", 2: "Coeur", 3: "Trèfle"}
 
 # Génération de la pile
 STACK = [x for x in range(13 * 4)]
 random.shuffle(STACK)
+
 
 def pick_card():
     '''
@@ -41,8 +43,14 @@ def stringify_deck(deck):
 # Génération des decks
 joueur = [pick_card() for _ in range(2)]
 croupier = [pick_card() for _ in range(2)]
-print(stringify_deck(joueur))
+bot1=[pick_card() for _ in range(2)]
+bot2=[pick_card() for _ in range(2)]
+bot3=[pick_card() for _ in range(2)]
 
+print(stringify_deck(joueur))
+print(stringify_deck(Bot1))
+print(stringify_deck(Bot2))
+print(stringify_deck(Bot3))
 # Boucle principale
 while True:
     option = input("> Quel est votre choix?\n").upper()
@@ -61,6 +69,10 @@ while True:
 
 count_croupier = count_deck(croupier)
 res = count_deck(joueur) - count_croupier
+bot1res=count_deck(bot1) - count_croupier
+bot2res=count_deck(bot2) - count_croupier
+bot3res=count_deck(bot3) - count_croupier
+
 print(f"Deck croupier: {count_croupier}")
 if res > 0:
     print("Joueur a gagné")
@@ -68,3 +80,27 @@ elif res == 0:
     print("Égalité")
 else:
     print("Joueur a perdu")
+
+
+if bot1res>0:
+    print("Bot1 a gagné avec une valeur de " + count_deck(bot1))
+elif bot1res == 0:
+    print("Égalité avec une valeur de " + count_deck(bot1))
+else:
+    print("Bot1 a perdu avec une valeur de " + count_deck(bot1))
+
+
+if bot2res>0:
+    print("Bot1 a gagné avec une valeur de " + count_deck(bot2))
+elif bot2res == 0:
+    print("Égalité avec une valeur de " + count_deck(bot2))
+else:
+    print("Bot1 a perdu avec une valeur de " + count_deck(bot2))
+
+
+if bot3res>0:
+    print("Bot1 a gagné avec une valeur de " + count_deck(bot3))
+elif bot3res == 0:
+    print("Égalité avec une valeur de " + count_deck(bot3))
+else:
+    print("Bot1 a perdu avec une valeur de " + count_deck(bot3))
