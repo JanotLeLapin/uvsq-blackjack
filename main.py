@@ -7,6 +7,8 @@ KINDS = {0: "Carreau", 1: "Pic", 2: "Coeur", 3: "Trèfle"}
 STACK = [x for x in range(13 * 4)]
 random.shuffle(STACK)
 
+PLAYER_COUNT = 4
+
 
 def pick_card():
     # Retire la dernière carte de la pile et la renvoie
@@ -37,14 +39,14 @@ def stringify_deck(deck):
 
 # Génération des decks
 croupier = [pick_card() for _ in range(2)]
-players = [[pick_card() for _ in range(2)] for _ in range(4)]
+players = [[pick_card() for _ in range(2)] for _ in range(PLAYER_COUNT)]
 
 standers = []
 
 # Boucle principale
 while True:
     print(stringify_deck(players[0]))
-    for i in range(4):
+    for i in range(PLAYER_COUNT):
         if i in standers:
             continue
 
@@ -63,11 +65,11 @@ while True:
                     players[i] = None
         elif option == "STAND":
             standers.append(i)
-            if len(standers) < 4:
+            if len(standers) < PLAYER_COUNT:
                 continue
 
             winner = 0
-            for i in range(4):
+            for i in range(PLAYER_COUNT):
                 if not players[i]:
                     continue
 
