@@ -1,5 +1,5 @@
 import random
-import time
+
 
 KINDS = {0: "Carreau", 1: "Pic", 2: "Coeur", 3: "Trèfle"}
 
@@ -49,83 +49,75 @@ bot3=[pick_card() for _ in range(2)]
 
 
 
-#bots commencent à piocher carte random
+#bots choisissent ce qu'ils veulent faire
 
 botoption=["hit","stand"]
 choixbot1=random.randint(0,2)
 choixbot2=random.randint(0,2)
 choixbot3=random.randint(0,2)
 
- 
-game=input("commencer? Y/N").upper()
-if game=="Y":
-    if botoption[choixbot1]=="hit":
+#Choix du bot1
+if botoption[choixbot1]=="hit":
 
-        bot1.append(pick_card())
-        print(stringify_deck(bot1))
-        if count_deck(bot1) == -1:
-                print("bot1 a depassé 21: élimination du jeu")
-                
-    elif botoption[choixbot1]=="stand":
-        print("bot 1 ne force pas il a donc"+ stringify_card(bot1))
-    
+    bot1.append(pick_card())
+    print(stringify_deck(bot1))
+    if count_deck(bot1) == -1:
+            print("bot1 a depassé 21: élimination du jeu")
+            
+elif botoption[choixbot1]=="stand":
+    print("bot 1 ne force pas il a donc"+ stringify_card(bot1))
 
 
-    if botoption[choixbot2]=="hit":
-        bot2.append(pick_card())
-        print(stringify_deck(bot2))
-        if count_deck(bot2) == -1:
-                print("bot2 a depassé 21: élimination du jeu")
-                
-    elif botoption[choixbot2]=="stand":
-        print("bot 2 ne force pas il a donc"+ stringify_card(bot2))
-        
-
-
-    if botoption[choixbot3]=="hit":
-        bot3.append(pick_card())
-        print(stringify_deck(bot3))
-        if count_deck(bot3) == -1:
-                print("bot3 a depassé 21: élimination du jeu")
-                
-    elif botoption[choixbot3]=="stand":
-        print("bot 3 ne force pas il a donc"+ stringify_card(bot3))
-        
-
+#Choix du bot2
+if botoption[choixbot2]=="hit":
     bot2.append(pick_card())
     print(stringify_deck(bot2))
+    if count_deck(bot2) == -1:
+            print("bot2 a depassé 21: élimination du jeu")
+            
+elif botoption[choixbot2]=="stand":
+    print("bot 2 ne force pas il a donc"+ stringify_card(bot2))
+    
 
+#Choix du bot3
+if botoption[choixbot3]=="hit":
     bot3.append(pick_card())
     print(stringify_deck(bot3))
-
-    # Boucle principale
-    x=True
-    if x==True:
+    if count_deck(bot3) == -1:
+            print("bot3 a depassé 21: élimination du jeu")
+            
+elif botoption[choixbot3]=="stand":
+    print("bot 3 ne force pas il a donc"+ stringify_card(bot3))
+    
+# Boucle principale
+ 
+while True:
+    print(stringify_deck(joueur))
+    option = input("> Quel est votre choix?\n").upper()
+    if option == "HIT":
+        joueur.append(pick_card())
         print(stringify_deck(joueur))
-        option = input("> Quel est votre choix?\n").upper()
-        if option == "HIT":
-            joueur.append(pick_card())
-            print(stringify_deck(joueur))
-            if count_deck(joueur) == -1:
-                print("Degage sale clochard")
-                x=False
-        elif option == "STAND":
-            count_croupier = count_deck(croupier)
-            res = count_deck(joueur) - count_croupier  
-            if res > 0:
-                print("Joueur a gagné , la valeur des cartes du croupier faisait au total "+ str(count_croupier))
-                x=False
-            elif res == 0:
-                print("Égalité , la valeur des cartes du croupier faisait au total "+ str(count_croupier))
-                x=False
-            else:
-                print("Joueur a perdu , la valeur des cartes du croupier faisait au total "+ str(count_croupier))
-                x=False
-        elif option == "SURRENDER":
-            print("fin partie")
-            x=False
+        if count_deck(joueur) == -1:
+            print("Degage sale clochard")
+            break
+    elif option == "STAND":
+        count_croupier = count_deck(croupier)
+        res = count_deck(joueur) - count_croupier  
+        if res > 0:
+            print("Joueur a gagné , la valeur des cartes du croupier faisait au total "+ str(count_croupier))
+            break
+        elif res == 0:
+            print("Égalité , la valeur des cartes du croupier faisait au total "+ str(count_croupier))
+            break
         else:
-            print("Option inconnue")
+            print("Joueur a perdu , la valeur des cartes du croupier faisait au total "+ str(count_croupier))
+            break
+    elif option == "SURRENDER":
+        print("fin partie")
+        break
+    else:
+        print("Option inconnue")
+        break
 
 count_croupier = count_deck(croupier)
 res = count_deck(joueur) - count_croupier
