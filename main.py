@@ -39,21 +39,33 @@ def stringify_deck(deck):
 croupier = [pick_card() for _ in range(2)]
 players = [[pick_card() for _ in range(2)] for _ in range(4)]
 
+standers = []
+
 # Boucle principale
 while True:
     print(stringify_deck(players[0]))
     for i in range(4):
-        # TODO: Ajouter des options pour les bots
-        option = input("> Quel est votre choix?\n").upper() if i == 0 else random.choice(["HIT"])
+        if i in standers:
+            continue
+
+        option = input("> Quel est votre choix?\n").upper() if i == 0 else random.choice(["HIT", "STAND"])
+        print(f"Joueur {i} {option.lower()}")
         if option == "HIT":
+            if players[i] == None:
+                continue
+
             players[i].append(pick_card())
             if count_deck(players[i]) == -1:
-                print(f"Joueur {i} éliminé")
+                print(f"Joueur {i} éliminé ({stringify_deck(players[i])})")
                 if i == 0:
                     sys.exit(0)
                 else:
                     players[i] = None
         elif option == "STAND":
+            standers.append(i)
+            if len(standers) < 4:
+                continue
+
             winner = 0
             for i in range(4):
                 if not players[i]:
