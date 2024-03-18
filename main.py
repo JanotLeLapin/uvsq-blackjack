@@ -72,7 +72,7 @@ while True:
                 sys.exit(0)
 
         elif option == "SURRENDER":
-            print("fin partie")
+            print("Fin de partie")
             break
         else:
             print("Option inconnue")
