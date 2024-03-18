@@ -47,14 +47,18 @@ while True:
         option = input("> Quel est votre choix?\n").upper() if i == 0 else random.choice(["HIT"])
         if option == "HIT":
             players[i].append(pick_card())
-            print(stringify_deck(players[i]))
             if count_deck(players[i]) == -1:
-                print("Degage sale clochard")
-                sys.exit(0)
-                break
+                print(f"Joueur {i} éliminé")
+                if i == 0:
+                    sys.exit(0)
+                else:
+                    players[i] = None
         elif option == "STAND":
             winner = 0
             for i in range(4):
+                if not players[i]:
+                    continue
+
                 if count_deck(players[i]) > count_deck(players[winner]):
                     winner = i
             count_croupier = count_deck(croupier)
